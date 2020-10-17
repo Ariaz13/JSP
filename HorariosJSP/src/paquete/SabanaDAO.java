@@ -74,21 +74,47 @@ public class SabanaDAO {
 
 		return list;
 	}
+	
+	public static Horario getRecordById(int id) throws SQLException {
+		Horario s = null;
+		Connection con=getConnection();  
+        PreparedStatement ps=con.prepareStatement("select * from horario where clave_horario=?");  
+        ps.setInt(1,id);  
+        ResultSet rs=ps.executeQuery(); 
+        while(rs.next()) {
+        	s= new Horario();
+        	s.setClave_horario(rs.getInt("clave_horario"));
+			s.setClave_materia(rs.getString("clave_materia"));
+			s.setIdprofesor(rs.getInt("idprofesor"));
+			s.setGrupo(rs.getString("grupo"));
+			s.setNo_alum(rs.getInt("no_alum"));
+			s.setSalon(rs.getString("salon"));
+			s.setLunes(rs.getString("lunes"));
+			s.setMartes(rs.getString("martes"));
+			s.setMiercoles(rs.getString("miercoles"));
+			s.setJueves(rs.getString("jueves"));
+			s.setViernes(rs.getString("viernes"));
+        }
+        
+        return s;
+	}
 
 	// Editar horario
 	public static int editar(Horario h) throws SQLException {
 		int status = 0;
 		Connection con = getConnection();
-		String sql = "UPDATE horario SET idprofesor=?, no_alum=?, salon=?, lunes=?, martes=?, miercoles=?, jueves=?, viernes=?";
+		String sql = "UPDATE horario SET clave_materia=?, idprofesor=?, grupo=?, no_alum=?, salon=?, lunes=?, martes=?, miercoles=?, jueves=?, viernes=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, h.getIdprofesor());
-		ps.setInt(2, h.getNo_alum());
-		ps.setString(3, h.getSalon());
-		ps.setString(4, h.getLunes());
-		ps.setString(5, h.getMartes());
-		ps.setString(6, h.getMiercoles());
-		ps.setString(7, h.getJueves());
-		ps.setString(8, h.getViernes());
+		ps.setString(1, h.getClave_materia());
+		ps.setInt(2, h.getIdprofesor());
+		ps.setString(3, h.getGrupo());
+		ps.setInt(4, h.getNo_alum());
+		ps.setString(5, h.getSalon());
+		ps.setString(6, h.getLunes());
+		ps.setString(7, h.getMartes());
+		ps.setString(8, h.getMiercoles());
+		ps.setString(9, h.getJueves());
+		ps.setString(10, h.getViernes());
 		status = ps.executeUpdate();
 
 		return status;
