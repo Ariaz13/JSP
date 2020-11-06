@@ -14,7 +14,7 @@ public class Conexion {
 	
 	public Conexion() {
 		driver = "com.mysql.jdbc.Driver";
-		url = "jdbc:mysql://localhost:3306/horarios"; 
+		url = "jdbc:mysql://db:3306/horarios"; 
 		uss = "root";
 		pass = "root";
 	}

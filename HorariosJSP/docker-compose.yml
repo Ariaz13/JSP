@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+ db:
+  image: ariaz1/jsp-mysql
+  container_name: jsp_mysql_contenedor 
+  restart: always
+  environment:
+   MYSQL_ROOT_PASSWORD: 'root'
+   MYSQL_DATABASE: 'horarios'
+  ports:
+   - '3306:3306'
+ web:
+  image: ariaz1/jsp-tomcat
+  container_name: jsp_tomcat_contenedor
+  restart: always
+  ports:
+   - "8080:8080"
