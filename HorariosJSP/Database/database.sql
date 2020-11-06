@@ -1,43 +1,44 @@
 USE DATABASE horarios;
 
-CREATE TABLE `horarios`.`profesor` (
-  `idprofesor` INT NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `rol` INT NOT NULL,
-  `contrasena` VARCHAR(8) NOT NULL,
-  PRIMARY KEY (`idprofesor`));
+CREATE TABLE profesor (
+  idprofesor INT NOT NULL,
+  nombre VARCHAR(45) NOT NULL,
+  rol INT NOT NULL,
+  contrasena VARCHAR(8) NOT NULL,
+  PRIMARY KEY (idprofesor));
 
 
-CREATE TABLE `horarios`.`materias` (
-  `clave_materia` VARCHAR(7) NOT NULL,
-  `clave_carrera` VARCHAR(3) NOT NULL,
-  `materia` VARCHAR(55) NOT NULL,
-  `carrera` VARCHAR(40) NOT NULL,
-  `periodo` VARCHAR(21) NOT NULL,
-  `turno` VARCHAR(8) NOT NULL,
-  `semestre` INT NOT NULL,
-  `creditos` INT NOT NULL,
-  `h_teoricas` INT NOT NULL,
-  `h_practicas` INT NOT NULL,
-  PRIMARY KEY (`clave_materia`));
+CREATE TABLE materias (
+  clave_materia VARCHAR(7) NOT NULL,
+  clave_carrera VARCHAR(3) NOT NULL,
+  materia VARCHAR(55) NOT NULL,
+  carrera VARCHAR(40) NOT NULL,
+  periodo VARCHAR(21) NOT NULL,
+  turno VARCHAR(8) NOT NULL,
+  semestre INT NOT NULL,
+  creditos INT NOT NULL,
+  h_teoricas INT NOT NULL,
+  h_practicas INT NOT NULL,
+  PRIMARY KEY (clave_materia));
   
 
   
- CREATE TABLE `horarios`.`horario` (
-  `clave_horario` INT NOT NULL AUTO_INCREMENT,
-  `clave_materia` VARCHAR(7) NOT NULL,
-  `idprofesor` INT NULL,
-  `grupo` VARCHAR(2) NOT NULL,
-  `no_alum` INT NOT NULL,
-  `salon` VARCHAR(4) NOT NULL,
-  `lunes` VARCHAR(11) NULL,
-  `martes` VARCHAR(11) NULL,
-  `miercoles` VARCHAR(11) NULL,
-  `jueves` VARCHAR(11) NULL,
-  `viernes` VARCHAR(11) NULL,
-  PRIMARY KEY (`clave_horario`));
+ CREATE TABLE horario (
+  clave_horario INT NOT NULL AUTO_INCREMENT,
+  clave_materia VARCHAR(7) NOT NULL,
+  idprofesor INT NULL,
+  grupo VARCHAR(2) NOT NULL,
+  no_alum INT NOT NULL,
+  salon VARCHAR(4) NOT NULL,
+  lunes VARCHAR(11) NULL,
+  martes VARCHAR(11) NULL,
+  miercoles VARCHAR(11) NULL,
+  jueves VARCHAR(11) NULL,
+  viernes VARCHAR(11) NULL,
+  PRIMARY KEY (clave_horario)
+  FOREIGN KEY(clave_materia) REFERENCES materias (clave_materia)
+  FOREIGN KEY(idprofesor) REFERENCES profesor (idprofesor));
   
- 
   
 INSERT INTO materias VALUES ( "ACF0901", "ISX", "CÁLCULO DIFERENCIAL", "INGENIERÍA EN SISTEMAS COMPUTACIONALES", "AGOSTO-DICIEMBRE/2020", "MATUTINO", 1,5,3,2);
 INSERT INTO materias VALUES ( "AED1285", "ISX", "FUNDAMENTOS DE PROGRAMACIÓN", "INGENIERÍA EN SISTEMAS COMPUTACIONALES", "AGOSTO-DICIEMBRE/2020", "MATUTINO", 1,5,2,3);
